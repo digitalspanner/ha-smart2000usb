@@ -351,10 +351,6 @@ def can_process(hass, instance_name, pgn_id):
     if pgn_id not in last_processed or now - last_processed[pgn_id] >= min_interval:
         hass.data[smart2000timestamp_key]["last_processed"][pgn_id] = now  
         return True
-    if pgn_id == 127508 or pgn_id == 127505:
-        hass.data[smart2000timestamp_key]["last_processed"][pgn_id] = now
-        _LOGGER.debug(f'Throttle disabled for PGN {pgn_id}')
-        return True
     else:
         _LOGGER.debug(f"Throttling activated for PGN {pgn_id} in instance {instance_name}.")
         return False
